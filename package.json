@@ -1,0 +1,39 @@
+{
+  "name": "quehacemos-prototype-pubsub-cache",
+  "version": "0.1.0",
+  "description": "Node server for testing prototype ",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "debug": "node-inspector & node --debug-brk server.js",
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha test --recursive"
+  },
+  "dependencies": {
+    "app-module-path": "^1.0.5",
+    "body-parser": "^1.14.1",
+    "compression": "^1.6.1",
+    "dotenv": "^2.0.0",
+    "express": "^4.13.3",
+    "pg": "latest"
+  },
+  "engines": {
+    "node": "^5.6.0"
+  },
+  "devDependencies": {
+    "chai": "latest",
+    "istanbul": "latest",
+    "mocha": "latest",
+    "sinon": "latest",
+    "sinon-chai": "latest",
+    "eslint": "^2.0.0"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "license": "All rights reserved. Copyright"
+}
