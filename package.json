@@ -15,7 +15,9 @@
     "compression": "^1.6.1",
     "dotenv": "^2.0.0",
     "express": "^4.13.3",
-    "pg": "latest"
+    "pg": "^6.1.0",
+    "pg-format": "^1.0.2",
+    "promised-retry": "^0.2.1"
   },
   "engines": {
     "node": "^5.6.0"
