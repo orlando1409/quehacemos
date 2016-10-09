@@ -32,13 +32,13 @@ const cats_enum = {
 	"OTHER":p(2,24),
 
 	"KIDZ":p(2,25),
-	"YOUNG_ADULT":p(2,26),
-	"FAMILY":p(2,27),
+	"FAMILY":p(2,26),
+	"YOUNG_ADULT":p(2,27),
 	"ADULT":p(2,28),
 	"GAY":p(2,29),
 	"XXX":p(2,30),
 
-	"RESERVED_FOR_FUTURE":reserved;
+	"RESERVED_FOR_FUTURE":reserved
 }
 
 module.exports = cats_enum;
