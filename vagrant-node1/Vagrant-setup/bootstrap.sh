@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 # GUEST IP
-GUEST_IP=192.168.121.121
+GUEST_IP=192.168.121.122
 
 # Hosts files
 HOSTS=/etc/hosts

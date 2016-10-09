@@ -1,10 +1,17 @@
 #!/bin/bash -e
 
 # GUEST IP
-GUEST_IP=192.168.121.124
+GUEST_IP=192.168.121.121
 
 # Hosts files
 HOSTS=/etc/hosts
+
+# Edit the following to change the name of the database user that will be created:
+APP_DB_USER=node
+APP_DB_PASS=node8088
+
+# Node version duh
+NODE_VER=5.x
 
 # Edit the following to change the version of PostgreSQL that is installed
 PG_VERSION=9.5
@@ -13,16 +20,18 @@ PG_VERSION=9.5
 APP_DB_NAME=$APP_DB_USER
 
 
+
 # TODO: change the print usage text
 ###########################################################
 # Changes below this line are probably not necessary
 ###########################################################
 print_db_usage () {
-  echo "Your Postgresql 9.5 environment has been setup"
-  echo "  Host: $GUEST_IP  [ pg.qhacemos ]"
+  echo "Your NODEJS environment has been setup and can be accessed on your local machine on the forwarded port (default: 8088)"
+  echo "  Host: $GUEST_IP  [ local.qhacemos ]"
   echo "  Guest IP: $GUEST_IP"
-  echo "    added:   \"pg.qhacemos   $GUEST_IP\"   to /etc/hosts"
+  echo "    added:   \"local.qhacemos   $GUEST_IP\"   to /etc/hosts"
   echo ""
+  echo "  NodeJS v:$NODE_VER"
   echo ""
   echo "  Port: 5432"
   echo "  Database: $APP_DB_NAME"
@@ -63,7 +72,7 @@ then
 fi
 
 chown vagrant /etc/hosts
-echo "$GUEST_IP   pg.qhacemos" >> /etc/hosts
+echo "$GUEST_IP   local.qhacemos" >> /etc/hosts
 
 PG_REPO_APT_SOURCE=/etc/apt/sources.list.d/pgdg.list
 if [ ! -f "$PG_REPO_APT_SOURCE" ]
@@ -85,9 +94,19 @@ apt-get -y install python
 #apt-get install python-setuptools
 apt-get -y install gyp
 
+# install node
+#apt-get -y install curl
+curl -sL "https://deb.nodesource.com/setup_$NODE_VER" | sudo -E bash -
+sudo apt-get install -y nodejs
+
+#Install node-inspector package for debugging
+npm install -g node-inspector
 
 # install git
 sudo apt-get -y install git
+
+# Local memcached
+sudo apt-get install memcached
 
 
 # Install standard version of postgresql
@@ -103,10 +122,6 @@ PG_DIR="/var/lib/postgresql/$PG_VERSION/main"
 
 # Edit postgresql.conf to change listen address to '*':
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" "$PG_CONF"
-
-# Edit postgresql.conf to add shared_preload_libraries
-sed -i "s/#shared_preload_libraries = ''/shared_preload_libraries = 'plugin_debugger'/" "$PG_CONF"
-
 
 
 
@@ -153,6 +168,9 @@ mkdir -p log
 # Restart PostgreSQL for good measure
 service postgresql restart
 
+
+# install mocha
+sudo npm install -g mocha
 
 
 # Tag the provision time:
