@@ -9,7 +9,23 @@ const path = require('path');
 const express = require('express');
 const compression = require('compression');
 
-global.appcache = {};
+const AppCache = require('lib/appcache');
+global.ACACHE = new AppCache();
+
+console.info("ACACHE.getMemoryUsage():",JSON.stringify(ACACHE.getMemoryUsage()));
+
+ACACHE.setpath ( "/123", 123, {"test":123}, true, function ( error, data ) {
+	if ( error ) {
+		console.error("ACACHE.setpath() error:", JSON.stringify(error));
+	} else {
+		console.info("ACACHE.setpath() data:", JSON.stringify(data));
+	}
+});
+
+let testcache = ACACHE.getpath ( "/123" );
+console.log("testcache:",JSON.stringify(testcache)); 
+
+
 
 global.app = express();
 
