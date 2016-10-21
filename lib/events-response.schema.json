@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "events": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "type": {
+                      "type": "string"
+                    },
+                    "category": {
+                      "type": "string"
+                    },
+                    "cover": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "source": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "description": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "start_time": {
+                      "type": "string"
+                    },
+                    "end_time": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "attending_count": {
+                      "type": "integer"
+                    },
+                    "attending": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      },
+                      "ticket_uri": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "place": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "about": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "name",
+                      "location"
+                    ]
+                  }
+                },
+                "required": [
+                  "id",
+                  "name",
+                  "distance",
+                  "start_time"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
