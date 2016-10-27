@@ -7,12 +7,14 @@ const pstRouter = express.Router();
 
 const c = require('controllers/pubsubtest');
 
-pstRouter.get( '/', c.get );
+pstRouter.get( '/:id', c.get );
+
+pstRouter.get( '/tagged/:tags', c.getTagged );
 
 pstRouter.post( '/', c.post );
 
-pstRouter.put( '/', c.put );
+pstRouter.put( '/:id', c.put );
 
-pstRouter.delete( '/', c.delete );
+pstRouter.delete( '/:id', c.delete );
 
 module.exports = pstRouter;
