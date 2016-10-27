@@ -3,14 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Web Component Tutorial</title>
-    <link rel="stylesheet" href="components/es5/paper-button/paper-button.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
+    <link rel="stylesheet" href="css/color.css" type="text/css">
+    <link rel="stylesheet" href="css/shadow.css" type="text/css">
+    <link rel="stylesheet" href="css/flex-layout.css" type="text/css">
+    <link rel="stylesheet" href="css/typography.css" type="text/css">
+    <link rel="stylesheet" href="components/paper-button/paper-button.css" type="text/css">
     <script src="webcomponents.min.js"></script>
     <script src="components/es5/date-widget.comp.js"></script>
-    <script src="components/es5/paper-button/paper-button.js"></script>
+    <script src="components/paper-button/paper-button.js"></script>
+    <script src="components/paper-button/paper-button-2.js"></script>
     <script>
       function main(){
           console.log("I am in main");
-          var button = new PaperButton({name:"Hi Edinson"});
+          var button = new PaperButton({name: 'こんにちは、影の世界!'});
+          button.className='paper-button';
+          //button.setAttribute('disabled');
           document.body.appendChild(button);
 
       }
@@ -18,8 +27,19 @@
     <script>
         document.addEventListener('DOMContentLoaded',main,false);
     </script>
+    <style>
+    body {
+       @apply(--paper-font-common-base);
+       font-size: 14px;
+       margin: 0;
+       padding: 24px;
+       background-color: var(--paper-grey-50);
+     }
+    </style>
 </head>
 <body>
+    <h1>Hola a todos....</h1>
     <date-widget theme="green"></date-widget>
+    <paper-button-2 animated>Hi Edinson </paper-button-2>
 </body>
 </html>
