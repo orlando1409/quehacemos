@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Component Tutorial</title>
+    <link rel="stylesheet" href="components/es5/paper-button/paper-button.css" type="text/css">
+    <script src="webcomponents.min.js"></script>
+    <script src="components/es5/date-widget.comp.js"></script>
+    <script src="components/es5/paper-button/paper-button.js"></script>
+    <script>
+      function main(){
+          console.log("I am in main");
+          var button = new PaperButton({name:"Hi Edinson"});
+          document.body.appendChild(button);
+
+      }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded',main,false);
+    </script>
+</head>
+<body>
+    <date-widget theme="green"></date-widget>
+</body>
+</html>

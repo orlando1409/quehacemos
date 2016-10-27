@@ -1,0 +1,6 @@
+paper-button  /deep/  .red{
+    background-color: red;
+}
+paper-button::shadow  > div {
+    background-color: yellow;
+}
