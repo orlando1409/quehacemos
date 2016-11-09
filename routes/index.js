@@ -10,6 +10,8 @@ const corsOptions = require('utils/routerUtils').corsOptions;
 
 module.exports = function registerRouters( app ) {
 
-	return app.use('/facebook', cors( corsOptions ), require('./facebook.router'));
+	app.use('/facebook', cors( corsOptions ), require('./facebook.router'));
+
+	app.use('/meetup',  require('./meetup.router'));
 
 }
