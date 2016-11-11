@@ -1,0 +1,10 @@
+
+:host {
+    display:flex;
+    font-size: 14px;
+    margin: 0;
+    padding: 24px;
+    background-color: var(--paper-grey-50);
+    color: var(--paper-red-300);
+    @apply --paper-font-common-base;
+}

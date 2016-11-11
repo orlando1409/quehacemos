@@ -1,0 +1,7 @@
+{
+  "name": "qhacemos",
+  "short_name": "qhacemos",
+  "description": "A cultural activities and events agenda app with highly configurable search to allow people to find activities according to their specific interests, financial situation or location. Events are filtered by location, category, price and/or date and displayed to users in order of relevance. ",
+  "start_url": "/",
+  "display": "standalone"
+}
