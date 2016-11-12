@@ -120,21 +120,6 @@ PG_DIR="/var/lib/postgresql/$PG_VERSION/main"
 # Edit postgresql.conf to change listen address to '*':
 sed -i "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" "$PG_CONF"
 
-# Edit postgresql.conf to add shared_preload_libraries
-sed -i "s/#shared_preload_libraries = ''/shared_preload_libraries = 'plugin_debugger'/" "$PG_CONF"
-
-
-# Clone and build the PL/pgSQL server-side debugger
-cd /usr/local/src
-git clone git://git.postgresql.org/git/pldebugger.git
-cd pldebugger
-export USE_PGXS=1
-make
-make install
-
-# install pgxn client
-#easy_install pgxnclient
-
 
 # Append to pg_hba.conf to add password auth:
 echo "host    all             all             all                     md5" >> "$PG_HBA"

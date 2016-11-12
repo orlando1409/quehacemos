@@ -3,13 +3,11 @@
 
 require('dotenv').config();
 require('app-module-path').addPath(__dirname);
-const path = require('path');
 
+const path = require('path');
 const express = require('express');
 const nunjucks = require ('nunjucks');
 const compression = require('compression');
-
-global.appcache = {};
 
 global.app = express();
 
@@ -23,18 +21,6 @@ app.use( compression( { threshold: 256 } ) ); // gzip deflate compression over h
 let tp = process.env.TRUST_PROXY || false;
 if ( !( tp === false || tp == 'false' || tp == '0' ) ) {
 	app.enable('trust proxy');
-}
-
-/* NOTE: this should be handled by NGINX: Node just receives HTTP */
-if ( process.env.NODE_ENV === 'production' ) {
-	let forceSsl = function(req, res, next) {
-		let proto = req.protocol;
-		if ( proto !== 'https') {
-			return res.redirect( 301, 'https://' + req.hostname + req.url );
-		}
-		return next();
-	};
-	app.use(forceSsl);
 }
 
 
@@ -55,10 +41,38 @@ if ( staticDir ) {
 	console.info ("Static directory: " + staticDir + " exposed at: " + staticRUrl );
 }
 
+
+
+// some globals
+
+global.ERROR = require('lib/error');
+const logger = require('lib/logger');
+global.LOGGER = new logger(process.env.NODE_ENV);
+global.UTIL = require('lib/util');
+global.RX = require('lib/rxvalidator');
+
+const Auth = require('lib/auth');
+global.DB = require('lib/db');
+if ( process.env.JWT_SECRET ) {
+	global.JWT_SECRET = process.env.JWT_SECRET;
+	global.AUTH = new Auth(process.env.JWT_SECRET);
+} else {
+	throw new Error("JWT_SECRET env var not set.")
+}
+
+const fs = require('fs');
+try {
+	global.version = fs.readFileSync('./.version',{encoding:'utf8'}).replace(/(\r\n|\n|\r)/gm,"");
+} catch ( e ) {
+	var errlog = new ERROR.ServerError ( e, e.message );
+	LOGGER.error( errlog );
+	global.version = "error";
+}
+
+
 // routers
-app.use( '/gallery', require('routers/gallery') );
-app.use( '/admin',   require('routers/admin')   );
-app.use( '/',        require('routers/home')    );
+app.use( '/v1/me',      require('routers/me')      );
+app.use( '/v1/version', require('routers/version') );
 
 app.set('port', ( process.env.PORT || 8888 ));
 app.listen( app.get('port'), function() {
