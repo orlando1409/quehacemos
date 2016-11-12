@@ -1,6 +1,8 @@
 
-/*
 var PaperButton =  require('../paper-button/paper-button');
+var PaperFab =  require('../paper-fab/paper-fab');
+var PaperIcon =  require('../paper-icon/paper-icon');
+
 var template = `
 <custom-style>
 <style>
@@ -17,10 +19,11 @@ var template = `
 </style>
 </custom-style>
 <div>
-<div>HOLA main-app</div>
-<paper-button  raised>Hello World!!!</paper-button>
-<button is="paper-button" raised >Hello World!!!</button>
-
+<paper-button color="red" href="http://google.com"><paper-icon icon="face"></paper-icon> Hi Edinson</paper-button>
+<paper-button raised color="green"><paper-icon icon="build"></paper-icon><span>I am your father...</span></paper-button>
+<paper-button raised disabled></paper-button>
+<paper-fab icon="build"></paper-fab>
+<paper-fab icon="build" color="blue" raised></paper-fab>
 <slot></slot>
 </div>
 `;
@@ -42,4 +45,4 @@ customElements.define('main-app',MainApp);
 customElements.whenDefined('main-app').then(() => {
 	console.log('registered main-app');
 });
-module.exports = MainApp;*/
+module.exports = MainApp;

@@ -9,13 +9,13 @@ const template = `
 			font: inherit;
 			text-transform: uppercase;
 			outline-width:0;
-			border-radius: 3px;
+			border-radius: 50%;
 			-moz-user-select: none;
 			-ms-user-select:none;
 			-webkit-user-select:none;
 			user-select:none;
 			cursor:pointer;
-			padding: 0.7em 0.57em;
+			padding: 0.57em 0.57em;
 			transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 			display: inline-block;
 			overflow:hidden;
@@ -41,11 +41,7 @@ const template = `
 			cursor: auto;
 			pointer-events: none;
 			box-shadow:none;
-			@apply --paper-button-disabled;
-		}
-
-		:host([color]){
-			color: var(--paper-button-color,'green');
+			@apply --paper-fab-disabled;
 		}
 
 		:host:not([disabled]):focus{
@@ -54,7 +50,7 @@ const template = `
 		:host([animated]) {
 			@apply --shadow-transition;
 		}
-		#paper-button .ripple{
+		#paper-fab .ripple{
 			position:absolute;
 			transform: scale3d(0,0,0);
 			opacity:1;
@@ -67,20 +63,18 @@ const template = `
 			z-index:-1;
 		}
 
-		#paper-button .ripple.run{
+		#paper-fab .ripple.run{
 			opacity: 0;
 			transform:none;
 		}
 	</style>
 </custom-style>
-<div id="paper-button">
-	<slot>
-	<span>My Paper Button</span>
-	</slot>
+<div id="paper-fab">
+	<paper-icon><slot></slot></paper-icon>
 </div>
 `;
 
-class PaperButton extends HTMLElement {
+class PaperFab extends HTMLElement {
 	constructor(){
 		super();
 		let shadowRoot = this.attachShadow({mode: 'open'});
@@ -105,7 +99,7 @@ class PaperButton extends HTMLElement {
 	drawRipple(x, y) {
 		let div = document.createElement('div');
 		div.classList.add('ripple');
-		this.shadowRoot.querySelector("#paper-button").appendChild(div);
+		this.shadowRoot.querySelector("#paper-fab").appendChild(div);
 		div.style.top = `${y - div.clientHeight/2}px`;
 		div.style.left = `${x - div.clientWidth/2}px`;
 		div.style.backgroundColor = getComputedStyle(this).color;
@@ -114,6 +108,8 @@ class PaperButton extends HTMLElement {
 	}
 	connectedCallback() {
 		 this.color = this.getAttribute('color');
+         this.icon = this.getAttribute('icon');
+
 	}
 	disconnectedCallback() {}
 	attributeChangedCallback(attrName, oldVal, newVal) {}
@@ -138,7 +134,13 @@ class PaperButton extends HTMLElement {
 	 get color(){
 		 return this.getAttribute('color');
 	 }
+     set icon(val){
+         this.shadowRoot.querySelector("paper-icon").setAttribute('icon',val);
+     }
+     get icon(){
+         this.getAttribute('icon');
+     }
 
 }
 
-customElements.define('paper-button',PaperButton,{extends:'button'});
+customElements.define('paper-fab',PaperFab,{extends:'button'});
