@@ -40,3 +40,6 @@ Obtain user access token ==> Request user events ==> Request user pages (GET {us
     },
 }
 ´´
+##Meetup
+We can use a rest client to send request to meetup API (api.meetup.com) using the api-key as parameter in the url e.g https://api.meetup.com/Padres-Solteros/events?&sign=true&photo-host=public&page=20&key=a683897869356c4b811644c56a6  or we can use a custom package, this package has all the posible request to the API
+https://github.com/jkutianski/meetup-api. I built two controller with each one of the options to get all the events of the Padres-Solteros group

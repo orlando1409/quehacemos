@@ -10,6 +10,8 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get( '/events/:group_urlname', controller.getEventsByUrlGroupName );
+router.get( '/events/v1/:group_urlname', controller.getEventsByUrlGroupName );
+
+router.get( '/events/v2/:group_urlname', controller.getEventsByUrlGroupNameV2 );
 
 module.exports = router;
